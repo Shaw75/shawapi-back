@@ -22,7 +22,7 @@ import static cc.shaw33.project.constant.UserConstant.USER_LOGIN_STATE;
 /**
  * 用户服务实现类
  *
- * @author Shaw
+ * @author shaw
  */
 @Service
 @Slf4j

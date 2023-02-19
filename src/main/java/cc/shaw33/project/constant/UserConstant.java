@@ -3,7 +3,7 @@ package cc.shaw33.project.constant;
 /**
  * 用户常量
  *
- * @author yupi
+ * @author shaw
  */
 public interface UserConstant {
 

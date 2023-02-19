@@ -3,7 +3,7 @@ package cc.shaw33.project.constant;
 /**
  * 通用常量
  *
- * @author yupi
+ * @author shaw
  */
 public interface CommonConstant {
 
