@@ -84,6 +84,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+        <groupId>cc.shaw33</groupId>
+        <artifactId>shawapi-client-sdk</artifactId>
+        <version>0.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>

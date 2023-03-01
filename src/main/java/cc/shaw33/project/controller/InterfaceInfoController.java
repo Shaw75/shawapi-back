@@ -1,10 +1,7 @@
 package cc.shaw33.project.controller;
 
 import cc.shaw33.project.annotation.AuthCheck;
-import cc.shaw33.project.common.BaseResponse;
-import cc.shaw33.project.common.DeleteRequest;
-import cc.shaw33.project.common.ErrorCode;
-import cc.shaw33.project.common.ResultUtils;
+import cc.shaw33.project.common.*;
 import cc.shaw33.project.constant.CommonConstant;
 import cc.shaw33.project.exception.BusinessException;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoAddRequest;
@@ -57,7 +54,7 @@ public class InterfaceInfoController {
         }
         InterfaceInfo interfaceInfo = new InterfaceInfo();
         BeanUtils.copyProperties(interfaceInfoAddRequest, interfaceInfo);
-        // 校验
+        // 参数校验
         interfaceInfoService.validInterfaceInfo(interfaceInfo, true);
         User loginUser = userService.getLoginUser(request);
         interfaceInfo.setUserId(loginUser.getId());
@@ -126,6 +123,45 @@ public class InterfaceInfoController {
         }
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
+    }
+    /**
+     * 发布
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/online")
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                     HttpServletRequest request) {
+        if(idRequest == null || idRequest.getId()<=0){
+             throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long id =idRequest.getId();
+        //判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if(oldInterfaceInfo == null){
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        //判断该接口是否调用
+
+
+        return null;
+        
+
+    }
+
+    /**
+     * 下线
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/offline")
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                     HttpServletRequest request) {
+        return null;
     }
 
     /**
