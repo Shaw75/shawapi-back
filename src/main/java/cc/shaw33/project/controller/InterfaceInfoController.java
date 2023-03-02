@@ -9,8 +9,10 @@ import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import cc.shaw33.project.model.entity.InterfaceInfo;
 import cc.shaw33.project.model.entity.User;
+import cc.shaw33.project.model.enums.InterfaceInfoStatusEnum;
 import cc.shaw33.project.service.InterfaceInfoService;
 import cc.shaw33.project.service.UserService;
+import cc.shaw33.shawapiclientsak.client.ShawApiClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +39,11 @@ public class InterfaceInfoController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private ShawApiClient shawApiClient;
+
+
 
     // region 增删改查
 
@@ -144,10 +151,21 @@ public class InterfaceInfoController {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         //判断该接口是否调用
+        cc.shaw33.shawapiclientsak.model.User user = new cc.shaw33.shawapiclientsak.model.User();
+        user.setUsername("test");
+        String username = shawApiClient.getUsernameByPost(user);
+        if (StringUtils.isBlank(username)) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口验证失败");
+        }
 
 
-        return null;
-        
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.ONLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+
+
 
     }
 
@@ -161,7 +179,22 @@ public class InterfaceInfoController {
     @PostMapping("/offline")
     public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
                                                      HttpServletRequest request) {
-        return null;
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long id = idRequest.getId();
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        // 仅本人或管理员可修改
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(InterfaceInfoStatusEnum.OFFLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+
     }
 
     /**

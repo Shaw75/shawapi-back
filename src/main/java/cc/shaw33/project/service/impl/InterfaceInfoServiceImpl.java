@@ -10,7 +10,7 @@ import cc.shaw33.project.service.InterfaceInfoService;
 import org.springframework.stereotype.Service;
 
 /**
-* @author shaw
+* @author Shaw
 * @description 针对表【interface_info(接口信息)】的数据库操作Service实现
 * @createDate 2023-02-16 20:33:36
 */
