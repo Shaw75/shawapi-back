@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * 更新请求
- *
+ * @author Shaw
  * @TableName product
  */
 @Data

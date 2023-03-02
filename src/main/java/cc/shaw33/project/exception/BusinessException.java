@@ -5,7 +5,7 @@ import cc.shaw33.project.common.ErrorCode;
 /**
  * 自定义异常类
  *
- * @author shaw
+ * @author Shaw
  */
 public class BusinessException extends RuntimeException {
 
