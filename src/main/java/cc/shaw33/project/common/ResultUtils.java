@@ -3,7 +3,7 @@ package cc.shaw33.project.common;
 /**
  * 返回工具类
  *
- * @author shaw
+ * @author Shaw
  */
 public class ResultUtils {
 
