@@ -5,6 +5,7 @@ import cc.shaw33.project.common.*;
 import cc.shaw33.project.constant.CommonConstant;
 import cc.shaw33.project.exception.BusinessException;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoAddRequest;
+import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
 import cc.shaw33.project.model.entity.InterfaceInfo;
@@ -15,6 +16,7 @@ import cc.shaw33.project.service.UserService;
 import cc.shaw33.shawapiclientsak.client.ShawApiClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 帖子接口
@@ -139,6 +142,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/online")
+    @AuthCheck(mustRole = "admin")
     public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest,
                                                      HttpServletRequest request) {
         if(idRequest == null || idRequest.getId()<=0){
@@ -177,6 +181,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/offline")
+    @AuthCheck(mustRole = "admin")
     public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
                                                      HttpServletRequest request) {
         if (idRequest == null || idRequest.getId() <= 0) {
@@ -195,6 +200,38 @@ public class InterfaceInfoController {
         boolean result = interfaceInfoService.updateById(interfaceInfo);
         return ResultUtils.success(result);
 
+    }
+    /**
+     * 测试调用接口
+     *
+     * @param interfaceInfoInvokeRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/invoke")
+    public BaseResponse<Object> offlineInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
+                                                      HttpServletRequest request) {
+        if (interfaceInfoInvokeRequest== null || interfaceInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long id = interfaceInfoInvokeRequest.getId();
+        String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        if(oldInterfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getValue()){
+            throw  new BusinessException(ErrorCode.PARAMS_ERROR,"接口已关闭");
+        }
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        ShawApiClient tempClient = new ShawApiClient(accessKey, secretKey);
+        Gson gson = new Gson();
+        cc.shaw33.shawapiclientsak.model.User user = gson.fromJson(userRequestParams, cc.shaw33.shawapiclientsak.model.User.class);
+        String usernameByPost = tempClient.getUsernameByPost(user);
+        return ResultUtils.success(usernameByPost);
     }
 
     /**

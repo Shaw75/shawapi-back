@@ -5,6 +5,11 @@ package cc.shaw33.project.common;
  *
  * @author Shaw
  */
+/**
+ * 返回工具类
+ *
+ * @author yupi
+ */
 public class ResultUtils {
 
     /**
