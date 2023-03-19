@@ -1,9 +1,9 @@
 package cc.shaw33.project.aop;
 
+import cc.shaw33.model.entity.User;
 import cc.shaw33.project.annotation.AuthCheck;
 import cc.shaw33.project.common.ErrorCode;
 import cc.shaw33.project.exception.BusinessException;
-import cc.shaw33.project.model.entity.User;
 import cc.shaw33.project.service.UserService;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +48,8 @@ public class AuthInterceptor {
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
         HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
         // 当前登录用户
-        User user = userService.getLoginUser(request);
+        User user =userService.getLoginUser(request);
+
         // 拥有任意权限即通过
         if (CollectionUtils.isNotEmpty(anyRole)) {
             String userRole = user.getUserRole();

@@ -1,10 +1,10 @@
 package cc.shaw33.project.service.impl;
 
+import cc.shaw33.model.entity.InterfaceInfo;
 import cc.shaw33.project.common.ErrorCode;
 import cc.shaw33.project.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cc.shaw33.project.model.entity.InterfaceInfo;
 import cc.shaw33.project.mapper.InterfaceInfoMapper;
 import cc.shaw33.project.service.InterfaceInfoService;
 import org.springframework.stereotype.Service;

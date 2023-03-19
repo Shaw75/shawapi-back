@@ -1,9 +1,9 @@
 package cc.shaw33.project.service.impl;
+import cc.shaw33.model.entity.UserInterfaceInfo;
 import cc.shaw33.project.common.ErrorCode;
 import cc.shaw33.project.exception.BusinessException;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cc.shaw33.project.model.entity.UserInterfaceInfo;
 import cc.shaw33.project.service.UserInterfaceInfoService;
 import cc.shaw33.project.mapper.UserInterfaceInfoMapper;
 import org.springframework.stereotype.Service;

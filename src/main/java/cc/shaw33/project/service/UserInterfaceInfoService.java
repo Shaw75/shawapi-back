@@ -1,5 +1,5 @@
 package cc.shaw33.project.service;
-import cc.shaw33.project.model.entity.UserInterfaceInfo;
+import cc.shaw33.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

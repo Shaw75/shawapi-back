@@ -1,5 +1,7 @@
 package cc.shaw33.project.controller;
 
+import cc.shaw33.model.entity.User;
+import cc.shaw33.model.entity.UserInterfaceInfo;
 import cc.shaw33.project.annotation.AuthCheck;
 import cc.shaw33.project.common.BaseResponse;
 import cc.shaw33.project.common.DeleteRequest;
@@ -11,8 +13,6 @@ import cc.shaw33.project.exception.BusinessException;
 import cc.shaw33.project.model.dto.userinterfaceInfo.UserInterfaceInfoAddRequest;
 import cc.shaw33.project.model.dto.userinterfaceInfo.UserInterfaceInfoQueryRequest;
 import cc.shaw33.project.model.dto.userinterfaceInfo.UserInterfaceInfoUpdateRequest;
-import cc.shaw33.project.model.entity.User;
-import cc.shaw33.project.model.entity.UserInterfaceInfo;
 import cc.shaw33.project.service.UserInterfaceInfoService;
 import cc.shaw33.project.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

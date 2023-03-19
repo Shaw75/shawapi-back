@@ -1,7 +1,7 @@
 package cc.shaw33.project.service;
 
+import cc.shaw33.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cc.shaw33.project.model.entity.InterfaceInfo;
 
 /**
 * @author shaw

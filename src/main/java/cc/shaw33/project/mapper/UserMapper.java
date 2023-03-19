@@ -1,7 +1,7 @@
 package cc.shaw33.project.mapper;
 
+import cc.shaw33.model.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import cc.shaw33.project.model.entity.User;
 
 /**
  * @Entity cc.shaw33.project.model.domain.User

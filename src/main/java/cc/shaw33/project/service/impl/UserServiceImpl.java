@@ -1,5 +1,6 @@
 package cc.shaw33.project.service.impl;
 
+import cc.shaw33.model.entity.User;
 import cc.shaw33.project.exception.BusinessException;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.digest.DigestUtil;
@@ -7,10 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cc.shaw33.project.common.ErrorCode;
 import cc.shaw33.project.mapper.UserMapper;
-import cc.shaw33.project.model.entity.User;
 import cc.shaw33.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;

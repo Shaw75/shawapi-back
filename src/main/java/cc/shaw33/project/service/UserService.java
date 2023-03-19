@@ -1,8 +1,8 @@
 package cc.shaw33.project.service;
 
 
+import cc.shaw33.model.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cc.shaw33.project.model.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 

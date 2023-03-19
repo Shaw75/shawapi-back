@@ -1,5 +1,6 @@
 package cc.shaw33.project.controller;
 
+import cc.shaw33.model.entity.User;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cc.shaw33.project.annotation.AuthCheck;
@@ -13,7 +14,6 @@ import cc.shaw33.project.model.dto.post.PostAddRequest;
 import cc.shaw33.project.model.dto.post.PostQueryRequest;
 import cc.shaw33.project.model.dto.post.PostUpdateRequest;
 import cc.shaw33.project.model.entity.Post;
-import cc.shaw33.project.model.entity.User;
 import cc.shaw33.project.service.PostService;
 import cc.shaw33.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;

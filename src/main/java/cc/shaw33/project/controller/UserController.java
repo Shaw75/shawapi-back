@@ -1,5 +1,6 @@
 package cc.shaw33.project.controller;
 
+import cc.shaw33.model.entity.User;
 import cc.shaw33.project.exception.BusinessException;
 import cc.shaw33.project.model.dto.user.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,8 +10,6 @@ import cc.shaw33.project.common.BaseResponse;
 import cc.shaw33.project.common.DeleteRequest;
 import cc.shaw33.project.common.ErrorCode;
 import cc.shaw33.project.common.ResultUtils;
-import cc.shaw33.project.model.dto.user.*;
-import cc.shaw33.project.model.entity.User;
 import cc.shaw33.project.model.vo.UserVO;
 import cc.shaw33.project.service.UserService;
 import org.apache.commons.lang3.StringUtils;

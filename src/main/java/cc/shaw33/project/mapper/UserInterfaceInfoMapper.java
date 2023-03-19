@@ -1,6 +1,6 @@
 package cc.shaw33.project.mapper;
 
-import cc.shaw33.project.model.entity.UserInterfaceInfo;
+import cc.shaw33.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

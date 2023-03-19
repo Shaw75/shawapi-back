@@ -1,5 +1,7 @@
 package cc.shaw33.project.controller;
 
+import cc.shaw33.model.entity.InterfaceInfo;
+import cc.shaw33.model.entity.User;
 import cc.shaw33.project.annotation.AuthCheck;
 import cc.shaw33.project.common.*;
 import cc.shaw33.project.constant.CommonConstant;
@@ -8,12 +10,10 @@ import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import cc.shaw33.project.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
-import cc.shaw33.project.model.entity.InterfaceInfo;
-import cc.shaw33.project.model.entity.User;
 import cc.shaw33.project.model.enums.InterfaceInfoStatusEnum;
 import cc.shaw33.project.service.InterfaceInfoService;
 import cc.shaw33.project.service.UserService;
-import cc.shaw33.shawapiclientsak.client.ShawApiClient;
+import cc.shaw33.shawapiclientsdk.client.ShawApiClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.gson.Gson;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Objects;
+
 
 /**
  * 帖子接口
@@ -155,7 +155,7 @@ public class InterfaceInfoController {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         //判断该接口是否调用
-        cc.shaw33.shawapiclientsak.model.User user = new cc.shaw33.shawapiclientsak.model.User();
+        cc.shaw33.shawapiclientsdk.model.User user = new cc.shaw33.shawapiclientsdk.model.User();
         user.setUsername("test");
         String username = shawApiClient.getUsernameByPost(user);
         if (StringUtils.isBlank(username)) {
@@ -229,7 +229,7 @@ public class InterfaceInfoController {
         String secretKey = loginUser.getSecretKey();
         ShawApiClient tempClient = new ShawApiClient(accessKey, secretKey);
         Gson gson = new Gson();
-        cc.shaw33.shawapiclientsak.model.User user = gson.fromJson(userRequestParams, cc.shaw33.shawapiclientsak.model.User.class);
+        cc.shaw33.shawapiclientsdk.model.User user = gson.fromJson(userRequestParams, cc.shaw33.shawapiclientsdk.model.User.class);
         String usernameByPost = tempClient.getUsernameByPost(user);
         return ResultUtils.success(usernameByPost);
     }
